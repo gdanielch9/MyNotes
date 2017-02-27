@@ -1,0 +1,46 @@
+﻿@model MyNote.Models.EventFormViewModel
+
+@{
+    ViewBag.Title = "CreateEvent";
+}
+
+<h2>Dodaj wspomnienie</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div >
+                Tytuł
+                @Html.EditorFor(model => model.EventFormDto.Title)
+                @Html.ValidationMessageFor(model => model.EventFormDto.Title)
+            </div>
+            <div>
+                Treść
+                @Html.EditorFor(model => model.EventFormDto.Text)
+                @Html.ValidationMessageFor(model => model.EventFormDto.Text)
+            </div>
+            <div>
+                Data
+                @Html.EditorFor(model => model.EventFormDto.Date)
+                @Html.ValidationMessageFor(model => model.EventFormDto.Date)
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="CreateEvent" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
