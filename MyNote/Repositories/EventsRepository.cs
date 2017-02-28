@@ -11,9 +11,9 @@ namespace MyNote.Repositories
     {
         private readonly ApplicationDbContext _context;
 
-        public EventsRepository()
+        public EventsRepository(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         public void Insert(Event eventEntity)

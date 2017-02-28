@@ -13,9 +13,9 @@ namespace MyNote.Services
     {
         private IEventsRepository _eventsRepository;
 
-        public EventService()
+        public EventService(IEventsRepository eventsRepository) 
         {
-            _eventsRepository = new EventsRepository();
+            _eventsRepository = eventsRepository;
         }
 
         public EventFormViewModel GetEventFormViewModel()

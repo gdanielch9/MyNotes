@@ -12,9 +12,9 @@ namespace MyNote.Controllers
     {
         private readonly IEventService _eventService;
 
-        public EventsController()       // TODO: IoC - Unity
+        public EventsController(IEventService eventService)
         {
-            _eventService = new EventService();
+            _eventService = eventService;
         }
 
         public ActionResult CreateEvent()
@@ -37,11 +37,5 @@ namespace MyNote.Controllers
             _eventService.InsertEvent(eventFormDto);
             return RedirectToAction("Index","Home");
         }
-
-        //public ActionResult Edit(int id)
-        //{
-        //    var viewModel = _eventService.GetEventEditViewModel(id);
-        //    return View(viewModel);
-        //}
     }
 }
