@@ -34,7 +34,7 @@ namespace MyNote.Controllers
             }
 
             _eventService.InsertEvent(eventFormDto);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("ShowEvents", "Events");
         }
 
         public ActionResult ShowEvents()
