@@ -16,6 +16,12 @@ namespace MyNote.Repositories
             _context = context;
         }
 
+        public List<Event> GetEventList()
+        {
+            var eventList =_context.Events.ToList();
+            return eventList;
+        }
+
         public void Insert(Event eventEntity)
         {
             _context.Events.Add(eventEntity);

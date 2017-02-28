@@ -23,6 +23,25 @@ namespace MyNote.Services
             return new EventFormViewModel();
         }
 
+        public List<ShowEventViewModel> GetShowEventViewModelList()
+        {
+            var eventList = _eventsRepository.GetEventList();
+            var showEventViewModelList = eventList.Select(x =>
+            {
+                ShowEventViewModel showEventViewModel = new ShowEventViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Text = x.Text,
+                    Date = x.Date,
+                    Photos = x.Photos
+                };
+                return showEventViewModel;
+            }).ToList();
+
+            return showEventViewModelList;
+        }
+
         public void InsertEvent(EventFormDto eventFormDto)
         {
             var eventEntity = new Event

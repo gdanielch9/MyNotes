@@ -10,5 +10,6 @@ namespace MyNote.Repositories
     public interface IEventsRepository
     {
         void Insert(Event eventEntity);
+        List<Event> GetEventList();
     }
 }

@@ -19,8 +19,8 @@ namespace MyNote.Controllers
 
         public ActionResult CreateEvent()
         {
-            var viewModel = _eventService.GetEventFormViewModel();
-            return View(viewModel);
+            var eventFormViewModel = _eventService.GetEventFormViewModel();
+            return View(eventFormViewModel);
         }
 
         [HttpPost]
@@ -29,13 +29,18 @@ namespace MyNote.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = _eventService.GetEventFormViewModel();
-                viewModel.EventFormDto = eventFormDto;
-
+                var eventFormVewModel = _eventService.GetEventFormViewModel();
+                eventFormVewModel.EventFormDto = eventFormDto;
             }
 
             _eventService.InsertEvent(eventFormDto);
             return RedirectToAction("Index","Home");
+        }
+
+        public ActionResult ShowEvents()
+        {
+            var eventViewModelList = _eventService.GetShowEventViewModelList();
+            return View(eventViewModelList);
         }
     }
 }
