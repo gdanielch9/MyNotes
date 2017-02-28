@@ -33,32 +33,6 @@
     <div class="col-md-offset-5 col-md-2">
         <input type="submit" value="Dodaj wspomnienie" class="btn btn-default" />
     </div>
-
-
-    @*<div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div >
-                Tytuł
-                @Html.EditorFor(model => model.EventFormDto.Title)
-                @Html.ValidationMessageFor(model => model.EventFormDto.Title)
-            </div>
-            <div>
-                Treść
-                @Html.EditorFor(model => model.EventFormDto.Text)
-                @Html.ValidationMessageFor(model => model.EventFormDto.Text)
-            </div>
-            <div>
-                Data
-                @Html.EditorFor(model => model.EventFormDto.Date)
-                @Html.ValidationMessageFor(model => model.EventFormDto.Date)
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Dodaj wspomnienie" class="btn btn-default" />
-            </div>
-        </div>
-    </div>*@
 }
 
 @section Scripts {

@@ -22,7 +22,8 @@
                 <div class="row event-footer">
                     <div class="col-md-offset-4 col-md-4 event-icons">
                         @Html.ActionLink(" ", "Edit", new { id = ShowEventViewModel.Id }, new { @class = "glyphicon glyphicon-edit " }) |
-                        @Html.ActionLink(" ", "DeleteEvent", new { id = ShowEventViewModel.Id }, new { @class = "glyphicon glyphicon-remove " })
+                        @Html.ActionLink(" ", "DeleteEvent", new { id = ShowEventViewModel.Id }, new { @id = "remove -btn",
+                       onclick = "return DeleteConfirm()", @class = "glyphicon glyphicon-remove" })
                     </div>
                     <div class="col-md-4 event-date">
                         @Html.DisplayFor(modelItem => ShowEventViewModel.Date)
@@ -32,3 +33,12 @@
         }
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        function DeleteConfirm() {
+            var result = confirm("Na pewno chcesz usunąć wspomnienie?");
+            return result;
+        }
+    </script>
+ }
