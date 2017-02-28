@@ -11,5 +11,6 @@ namespace MyNote.Repositories
     {
         void Insert(Event eventEntity);
         List<Event> GetEventList();
+        void Delete(int id);
     }
 }

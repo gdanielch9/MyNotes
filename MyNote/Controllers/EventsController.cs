@@ -34,7 +34,13 @@ namespace MyNote.Controllers
             }
 
             _eventService.InsertEvent(eventFormDto);
-            return RedirectToAction("ShowEvents", "Events");
+            return RedirectToAction("ShowEvents");
+        }
+
+        public ActionResult DeleteEvent(int id)
+        {
+            _eventService.deleteEvent(id);
+            return RedirectToAction("ShowEvents");
         }
 
         public ActionResult ShowEvents()

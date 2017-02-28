@@ -18,6 +18,11 @@ namespace MyNote.Services
             _eventsRepository = eventsRepository;
         }
 
+        public void deleteEvent(int id)
+        {
+            _eventsRepository.Delete(id);
+        }
+
         public EventFormViewModel GetEventFormViewModel()
         {
             return new EventFormViewModel();
@@ -34,7 +39,7 @@ namespace MyNote.Services
                     Title = x.Title,
                     Text = x.Text,
                     Date = x.Date,
-                    Photos = x.Photos
+                    Photos = x.Photos,
                 };
                 return showEventViewModel;
             }).ToList();

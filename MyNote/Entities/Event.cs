@@ -17,5 +17,6 @@ namespace MyNote.Entities
         [Required]
         public string Date { get; set; }
         public virtual List<Photo> Photos { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

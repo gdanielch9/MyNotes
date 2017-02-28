@@ -16,9 +16,16 @@ namespace MyNote.Repositories
             _context = context;
         }
 
+        public void Delete(int id)
+        {
+            var eventToRemove = _context.Events.Find(id);
+            eventToRemove.IsDeleted = true;
+            _context.SaveChanges();
+        }
+
         public List<Event> GetEventList()
         {
-            var eventList =_context.Events.ToList();
+            var eventList =_context.Events.Where(x=>x.IsDeleted != true).ToList();
             return eventList;
         }
 

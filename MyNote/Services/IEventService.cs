@@ -13,5 +13,6 @@ namespace MyNote.Services
         EventFormViewModel GetEventFormViewModel();
         void InsertEvent(EventFormDto eventFormDto);
         List<ShowEventViewModel> GetShowEventViewModelList();
+        void deleteEvent(int id);
     }
 }

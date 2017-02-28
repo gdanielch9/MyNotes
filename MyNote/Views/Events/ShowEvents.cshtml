@@ -10,22 +10,22 @@
         </p>
     </div>
     <div class="row">
-        @foreach (var item in Model)
+        @foreach (var ShowEventViewModel in Model)
         {
             <div class="col-md-offset-4 col-md-4 event-container">
                 <div class="event-title">
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => ShowEventViewModel.Title)
                 </div>
                 <div class="event-text">
-                    @Html.DisplayFor(modelItem => item.Text)
+                    @Html.DisplayFor(modelItem => ShowEventViewModel.Text)
                 </div>
                 <div class="row event-footer">
                     <div class="col-md-offset-4 col-md-4 event-icons">
-                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit " }) |
-                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove " })
+                        @Html.ActionLink(" ", "Edit", new { id = ShowEventViewModel.Id }, new { @class = "glyphicon glyphicon-edit " }) |
+                        @Html.ActionLink(" ", "DeleteEvent", new { id = ShowEventViewModel.Id }, new { @class = "glyphicon glyphicon-remove " })
                     </div>
                     <div class="col-md-4 event-date">
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @Html.DisplayFor(modelItem => ShowEventViewModel.Date)
                     </div>
                 </div>
             </div>
