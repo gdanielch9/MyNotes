@@ -12,6 +12,7 @@ namespace MyNote.Dtos
         [Required]
         public string Title { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         [Required]
         public string Date { get; set; }

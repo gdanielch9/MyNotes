@@ -10,8 +10,32 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-offset-4 col-md-4 event-container">
+        <div class="event-title">
+            @Html.EditorFor(model => model.EventFormDto.Title, new { htmlAttributes = new { @class = "event-form-title", placeholder = "Tytuł" }})
+            @Html.ValidationMessageFor(model => model.EventFormDto.Title)
+        </div>
+        <div class="event-text">
+            @Html.EditorFor(model => model.EventFormDto.Text, new { htmlAttributes = new { @class = "event-form-text", placeholder = "Treść" } })
+            @Html.ValidationMessageFor(model => model.EventFormDto.Text)
+        </div>
+        <div class="row event-footer">
+            <div class="col-md-offset-4 col-md-4 event-icons">
+            </div>
+            <div class="col-md-4 event-date">
+                @Html.EditorFor(model => model.EventFormDto.Date, new { htmlAttributes = new { @class = "event-form-date", placeholder = "Data" } })
+                @Html.ValidationMessageFor(model => model.EventFormDto.Date)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-offset-5 col-md-2">
+        <input type="submit" value="Dodaj wspomnienie" class="btn btn-default" />
+    </div>
+
+
+    @*<div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -34,7 +58,7 @@
                 <input type="submit" value="Dodaj wspomnienie" class="btn btn-default" />
             </div>
         </div>
-    </div>
+    </div>*@
 }
 
 @section Scripts {

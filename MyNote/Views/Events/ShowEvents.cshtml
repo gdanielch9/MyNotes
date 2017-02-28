@@ -3,32 +3,32 @@
 @{
     ViewBag.Title = "ShowEvents";
 }
-<div class="row">
-    <p>
-        @Html.ActionLink("Dodaj wspomnienie", "CreateEvent",null, new { @class = "btn btn-defaul" } )
-    </p>
-</div>
-<div class="row">
-@foreach (var item in Model)
-{
-    <div class="col-md-offset-4 col-md-4 event-container">
-        <div class="event-title">
-            @Html.DisplayFor(modelItem => item.Title)
-        </div>
-        <br />
-        <div class="event-text">
-            @Html.DisplayFor(modelItem => item.Text)
-        </div>
-        <br />
-        <div class="row event-footer">
-            <div class="col-md-offset-4 col-md-4 event-icons">
-                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit" }) |
-                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove" })
-            </div>
-            <div class="col-md-4 event-date">
-                @Html.DisplayFor(modelItem => item.Date)
-            </div>
-        </div>
+<div class="row show-event-conainer">
+    <div class="row">
+        <p>
+            @Html.ActionLink("Dodaj wspomnienie", "CreateEvent", null, new { @class = "btn btn-defaul event-addEvent-btn" })
+        </p>
     </div>
-}
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-offset-4 col-md-4 event-container">
+                <div class="event-title">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </div>
+                <div class="event-text">
+                    @Html.DisplayFor(modelItem => item.Text)
+                </div>
+                <div class="row event-footer">
+                    <div class="col-md-offset-4 col-md-4 event-icons">
+                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit " }) |
+                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove " })
+                    </div>
+                    <div class="col-md-4 event-date">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

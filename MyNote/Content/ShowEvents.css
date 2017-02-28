@@ -1,7 +1,12 @@
-﻿.event-container{
+﻿.show-event-conainer{
+    padding: 5px;
+}
+
+.event-container{
     background-color: #ffffff;
     border-radius:20px;
-    border: solid #000000 2px;
+    border: solid #abced4 2px;
+    margin-bottom: 20px;
 }
 
 .event-container .event-title{
@@ -23,4 +28,31 @@
 
 .event-container .event-footer .event-icons{
     text-align:center;
+}
+
+.event-container .event-footer .event-icons a{
+    text-align:center;
+    text-decoration:none;
+    color:inherit;
+}
+
+.event-addEvent-btn{
+    border:solid 1px #abced4;
+    text-decoration:none;
+    color:inherit;    
+    background-color:#ffffff;
+}
+
+.event-addEvent-btn:hover{
+    background-color:#abced4;
+}
+
+.event-form-text{
+    width:100%;
+    max-width:none;
+}
+
+.event-form-date{
+    width:100%;
+    max-width:100%;
 }
