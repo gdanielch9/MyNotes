@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MyNote.Entities;
 using MyNote.Models;
+using System.Data.Entity;
 
 namespace MyNote.Repositories
 {
@@ -21,6 +22,18 @@ namespace MyNote.Repositories
             var eventToRemove = _context.Events.Find(id);
             eventToRemove.IsDeleted = true;
             _context.SaveChanges();
+        }
+
+        public void Edit(Event @event)
+        {
+            _context.Entry(@event).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public Event GetEventById(int id)
+        {
+            var @event = _context.Events.Where(x=> x.IsDeleted != true).Single(x => x.Id == id);
+            return @event;
         }
 
         public List<Event> GetEventList()

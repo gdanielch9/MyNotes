@@ -43,6 +43,28 @@ namespace MyNote.Controllers
             return RedirectToAction("ShowEvents");
         }
 
+        public ActionResult EditEvent(int id)
+        {
+            var eventFormViewModel = _eventService.GetEventById(id);
+
+            return View(eventFormViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditEvent(EventFormDto eventFormDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                var eventFormViewModel = _eventService.GetEventFormViewModel();
+                eventFormViewModel.EventFormDto = eventFormDto;
+
+                return View(eventFormViewModel);
+            }
+
+            _eventService.EditEvent(eventFormDto);
+            return RedirectToAction("ShowEvents");
+        }
+
         public ActionResult ShowEvents()
         {
             var eventViewModelList = _eventService.GetShowEventViewModelList();

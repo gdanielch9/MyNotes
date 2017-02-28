@@ -12,5 +12,7 @@ namespace MyNote.Repositories
         void Insert(Event eventEntity);
         List<Event> GetEventList();
         void Delete(int id);
+        Event GetEventById(int id);
+        void Edit(Event @event);
     }
 }

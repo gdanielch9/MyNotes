@@ -23,6 +23,37 @@ namespace MyNote.Services
             _eventsRepository.Delete(id);
         }
 
+        public void EditEvent(EventFormDto eventFormDto)
+        {
+            var @event = new Event()
+            {
+                Id = eventFormDto.Id,
+                Title = eventFormDto.Title,
+                Text = eventFormDto.Text,
+                Date = eventFormDto.Date
+                // Photos = eventFormDto 
+            };
+            _eventsRepository.Edit(@event);
+        }
+
+        public EventFormViewModel GetEventById(int id)
+        {
+            var @event = _eventsRepository.GetEventById(id);
+            var eventFormViewModel = new EventFormViewModel()
+            {
+                EventFormDto = new EventFormDto()
+                {
+                    Id = @event.Id,
+                    Title = @event.Title,
+                    Text = @event.Text,
+                    Date = @event.Date,
+                    PhotoPaths = @event.Photos.Select(x => x.Path).ToList()
+                }
+            };
+
+            return eventFormViewModel;
+        }
+
         public EventFormViewModel GetEventFormViewModel()
         {
             return new EventFormViewModel();
@@ -49,13 +80,13 @@ namespace MyNote.Services
 
         public void InsertEvent(EventFormDto eventFormDto)
         {
-            var eventEntity = new Event
+            var @event = new Event
             {
                 Title = eventFormDto.Title,
                 Text = eventFormDto.Text,
                 Date = eventFormDto.Date
             };
-            _eventsRepository.Insert(eventEntity);
+            _eventsRepository.Insert(@event);
         }
     }
 }

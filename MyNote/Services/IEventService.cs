@@ -14,5 +14,7 @@ namespace MyNote.Services
         void InsertEvent(EventFormDto eventFormDto);
         List<ShowEventViewModel> GetShowEventViewModelList();
         void deleteEvent(int id);
+        EventFormViewModel GetEventById(int id);
+        void EditEvent(EventFormDto eventFormDto);
     }
 }
