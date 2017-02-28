@@ -1,1 +1,26 @@
-﻿
+﻿.event-container{
+    background-color: #ffffff;
+    border-radius:20px;
+    border: solid #000000 2px;
+}
+
+.event-container .event-title{
+    font-weight:700;
+    text-align:center;
+    padding: 5px 0px;
+}
+
+.event-container .event-text{
+    padding: 5px 0px;
+}
+
+.event-container .event-footer{
+    font-size: 9px;
+    color: #626262;
+    text-align:right;
+    padding: 3px 0px;
+}
+
+.event-container .event-footer .event-icons{
+    text-align:center;
+}
