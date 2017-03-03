@@ -5,6 +5,8 @@ using MyNote.Services;
 using MyNote.Models;
 using System.Data.Entity;
 using MyNote.Repositories;
+using AutoMapper;
+using MyNote.Infrastructure;
 
 namespace MyNote.App_Start
 {
@@ -43,7 +45,8 @@ namespace MyNote.App_Start
             container.RegisterType<DbContext, ApplicationDbContext>();
             container.RegisterType<IEventService, EventService>();
             container.RegisterType<IEventsRepository, EventsRepository>();
-            
+            container.RegisterType<IMappingInfrastructure, MappingInfrastructure>();
+            container.RegisterType<IMapper>( new InjectionFactory(c => AutoMapperConfiguration.ConfigureMapper()));
         }
     }
 }

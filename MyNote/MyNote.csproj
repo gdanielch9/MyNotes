@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -214,6 +218,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -230,6 +235,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\IMappingInfrastructure.cs" />
+    <Compile Include="Infrastructure\MappingInfrastructure.cs" />
     <Compile Include="Migrations\201702272044166_InitialCreate.cs" />
     <Compile Include="Migrations\201702272044166_InitialCreate.Designer.cs">
       <DependentUpon>201702272044166_InitialCreate.cs</DependentUpon>
@@ -241,6 +248,14 @@
     <Compile Include="Migrations\201702281119334_2_IsDeletedAddedToEventEntity.cs" />
     <Compile Include="Migrations\201702281119334_2_IsDeletedAddedToEventEntity.Designer.cs">
       <DependentUpon>201702281119334_2_IsDeletedAddedToEventEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703031653292_3_EventAndUserReferenceAdded.cs" />
+    <Compile Include="Migrations\201703031653292_3_EventAndUserReferenceAdded.Designer.cs">
+      <DependentUpon>201703031653292_3_EventAndUserReferenceAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703031701321_4_EventAndUserReferenceEdited.cs" />
+    <Compile Include="Migrations\201703031701321_4_EventAndUserReferenceEdited.Designer.cs">
+      <DependentUpon>201703031701321_4_EventAndUserReferenceEdited.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -338,6 +353,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702281119334_2_IsDeletedAddedToEventEntity.resx">
       <DependentUpon>201702281119334_2_IsDeletedAddedToEventEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703031653292_3_EventAndUserReferenceAdded.resx">
+      <DependentUpon>201703031653292_3_EventAndUserReferenceAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703031701321_4_EventAndUserReferenceEdited.resx">
+      <DependentUpon>201703031701321_4_EventAndUserReferenceEdited.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using Moq;
 using MyNote.Dtos;
 using MyNote.Entities;
+using MyNote.Infrastructure;
 using MyNote.Repositories;
 using MyNote.Services;
 using NUnit.Framework;
@@ -16,13 +17,15 @@ namespace Tests.Services
     class EventServiceTest
     {
         private Mock<IEventsRepository> _eventsRepositoryMock;
+        private Mock<IMappingInfrastructure> _mappingInfrastructureMock;
         private EventService _sut;
 
         [SetUp]
         public void Setup()
         {
             _eventsRepositoryMock = new Mock<IEventsRepository>();
-            _sut = new EventService(_eventsRepositoryMock.Object);
+            _mappingInfrastructureMock = new Mock<IMappingInfrastructure>();
+            _sut = new EventService(_eventsRepositoryMock.Object, _mappingInfrastructureMock.Object);
         }
 
         [Test]

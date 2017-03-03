@@ -6,16 +6,19 @@ using MyNote.Dtos;
 using MyNote.Models;
 using MyNote.Repositories;
 using MyNote.Entities;
+using MyNote.Infrastructure;
 
 namespace MyNote.Services
 {
     public class EventService : IEventService
     {
         private IEventsRepository _eventsRepository;
+        private IMappingInfrastructure _mappingInfrastructure;
 
-        public EventService(IEventsRepository eventsRepository) 
+        public EventService(IEventsRepository eventsRepository, IMappingInfrastructure mappingInfrastructure) 
         {
             _eventsRepository = eventsRepository;
+            _mappingInfrastructure = mappingInfrastructure;
         }
 
         public void deleteEvent(int id)
@@ -25,32 +28,14 @@ namespace MyNote.Services
 
         public void EditEvent(EventFormDto eventFormDto)
         {
-            var @event = new Event()
-            {
-                Id = eventFormDto.Id,
-                Title = eventFormDto.Title,
-                Text = eventFormDto.Text,
-                Date = eventFormDto.Date
-                // Photos = eventFormDto 
-            };
+            var @event = _mappingInfrastructure.MapEventFormDtoToEvent(eventFormDto);
             _eventsRepository.Edit(@event);
         }
 
         public EventFormViewModel GetEventById(int id)
         {
             var @event = _eventsRepository.GetEventById(id);
-            var eventFormViewModel = new EventFormViewModel()
-            {
-                EventFormDto = new EventFormDto()
-                {
-                    Id = @event.Id,
-                    Title = @event.Title,
-                    Text = @event.Text,
-                    Date = @event.Date,
-                    PhotoPaths = @event.Photos.Select(x => x.Path).ToList()
-                }
-            };
-
+            var eventFormViewModel = _mappingInfrastructure.MapEventToEventFormViewModel(@event);
             return eventFormViewModel;
         }
 
@@ -64,14 +49,7 @@ namespace MyNote.Services
             var eventList = _eventsRepository.GetEventList();
             var showEventViewModelList = eventList.Select(x =>
             {
-                ShowEventViewModel showEventViewModel = new ShowEventViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Text = x.Text,
-                    Date = x.Date,
-                    Photos = x.Photos,
-                };
+                ShowEventViewModel showEventViewModel = _mappingInfrastructure.MapEventToShowEventFormViewModel(x);
                 return showEventViewModel;
             }).ToList();
 
@@ -80,12 +58,7 @@ namespace MyNote.Services
 
         public void InsertEvent(EventFormDto eventFormDto)
         {
-            var @event = new Event
-            {
-                Title = eventFormDto.Title,
-                Text = eventFormDto.Text,
-                Date = eventFormDto.Date
-            };
+            var @event = _mappingInfrastructure.MapEventFormDtoToEvent(eventFormDto);
             _eventsRepository.Insert(@event);
         }
     }
