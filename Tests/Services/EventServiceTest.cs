@@ -18,6 +18,7 @@ namespace Tests.Services
     {
         private Mock<IEventsRepository> _eventsRepositoryMock;
         private Mock<IMappingInfrastructure> _mappingInfrastructureMock;
+        private Mock<IAuthInfrastructure> _authInfrastructure;
         private EventService _sut;
 
         [SetUp]
@@ -25,7 +26,8 @@ namespace Tests.Services
         {
             _eventsRepositoryMock = new Mock<IEventsRepository>();
             _mappingInfrastructureMock = new Mock<IMappingInfrastructure>();
-            _sut = new EventService(_eventsRepositoryMock.Object, _mappingInfrastructureMock.Object);
+            _authInfrastructure = new Mock<IAuthInfrastructure>();
+            _sut = new EventService(_eventsRepositoryMock.Object, _mappingInfrastructureMock.Object, _authInfrastructure.Object);
         }
 
         [Test]

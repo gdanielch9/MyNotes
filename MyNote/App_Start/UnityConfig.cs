@@ -7,6 +7,9 @@ using System.Data.Entity;
 using MyNote.Repositories;
 using AutoMapper;
 using MyNote.Infrastructure;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using MyNote.Controllers;
 
 namespace MyNote.App_Start
 {
@@ -43,10 +46,15 @@ namespace MyNote.App_Start
 
             // TODO: Register your types here
             container.RegisterType<DbContext, ApplicationDbContext>();
+            container.RegisterType<UserManager<ApplicationUser>>();
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<IMapper>( new InjectionFactory(c => AutoMapperConfiguration.ConfigureMapper()));
+            container.RegisterType<IMappingInfrastructure, MappingInfrastructure>();
+            container.RegisterType<IAuthInfrastructure, AuthInfrastructure>();
             container.RegisterType<IEventService, EventService>();
             container.RegisterType<IEventsRepository, EventsRepository>();
-            container.RegisterType<IMappingInfrastructure, MappingInfrastructure>();
-            container.RegisterType<IMapper>( new InjectionFactory(c => AutoMapperConfiguration.ConfigureMapper()));
+
         }
     }
 }

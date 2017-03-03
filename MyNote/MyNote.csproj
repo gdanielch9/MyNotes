@@ -235,6 +235,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AuthInfrastructure.cs" />
+    <Compile Include="Infrastructure\IAuthInfrastructure.cs" />
     <Compile Include="Infrastructure\IMappingInfrastructure.cs" />
     <Compile Include="Infrastructure\MappingInfrastructure.cs" />
     <Compile Include="Migrations\201702272044166_InitialCreate.cs" />

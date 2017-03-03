@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MyNote.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private readonly IEventService _eventService;
@@ -39,7 +40,7 @@ namespace MyNote.Controllers
 
         public ActionResult DeleteEvent(int id)
         {
-            _eventService.deleteEvent(id);
+            _eventService.DeleteEvent(id);
             return RedirectToAction("ShowEvents");
         }
 

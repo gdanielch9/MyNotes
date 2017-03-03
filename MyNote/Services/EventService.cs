@@ -7,6 +7,7 @@ using MyNote.Models;
 using MyNote.Repositories;
 using MyNote.Entities;
 using MyNote.Infrastructure;
+using Microsoft.AspNet.Identity;
 
 namespace MyNote.Services
 {
@@ -14,14 +15,15 @@ namespace MyNote.Services
     {
         private IEventsRepository _eventsRepository;
         private IMappingInfrastructure _mappingInfrastructure;
+        private IAuthInfrastructure _authInfrastructure;
 
-        public EventService(IEventsRepository eventsRepository, IMappingInfrastructure mappingInfrastructure) 
+        public EventService(IEventsRepository eventsRepository, IMappingInfrastructure mappingInfrastructure, IAuthInfrastructure authInfrastructure) 
         {
             _eventsRepository = eventsRepository;
             _mappingInfrastructure = mappingInfrastructure;
         }
 
-        public void deleteEvent(int id)
+        public void DeleteEvent(int id)
         {
             _eventsRepository.Delete(id);
         }
@@ -59,6 +61,8 @@ namespace MyNote.Services
         public void InsertEvent(EventFormDto eventFormDto)
         {
             var @event = _mappingInfrastructure.MapEventFormDtoToEvent(eventFormDto);
+            @event.UserId = _authInfrastructure.GetCurrentUserId();
+
             _eventsRepository.Insert(@event);
         }
     }
