@@ -27,6 +27,9 @@ namespace MyNote
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/ShowEvents.css"));
+
+            bundles.Add(new StyleBundle("~/Content/validators").Include(
+            "~/Content/Validation*"));
         }
     }
 }

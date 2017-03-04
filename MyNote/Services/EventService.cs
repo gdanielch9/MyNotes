@@ -21,6 +21,7 @@ namespace MyNote.Services
         {
             _eventsRepository = eventsRepository;
             _mappingInfrastructure = mappingInfrastructure;
+            _authInfrastructure = authInfrastructure;
         }
 
         public void DeleteEvent(int id)
@@ -37,6 +38,12 @@ namespace MyNote.Services
         public EventFormViewModel GetEventById(int id)
         {
             var @event = _eventsRepository.GetEventById(id);
+
+            if (@event.UserId != _authInfrastructure.GetCurrentUserId())
+            {
+                return null;
+            }
+
             var eventFormViewModel = _mappingInfrastructure.MapEventToEventFormViewModel(@event);
             return eventFormViewModel;
         }
@@ -48,7 +55,8 @@ namespace MyNote.Services
 
         public List<ShowEventViewModel> GetShowEventViewModelList()
         {
-            var eventList = _eventsRepository.GetEventList();
+            var userId = _authInfrastructure.GetCurrentUserId();
+            var eventList = _eventsRepository.GetCurrentUserEventList(userId);
             var showEventViewModelList = eventList.Select(x =>
             {
                 ShowEventViewModel showEventViewModel = _mappingInfrastructure.MapEventToShowEventFormViewModel(x);

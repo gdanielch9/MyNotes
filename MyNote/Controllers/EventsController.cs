@@ -48,10 +48,16 @@ namespace MyNote.Controllers
         {
             var eventFormViewModel = _eventService.GetEventById(id);
 
+            if (eventFormViewModel == null)
+            {
+                return new HttpNotFoundResult();
+            }
+
             return View(eventFormViewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditEvent(EventFormDto eventFormDto)
         {
             if (!ModelState.IsValid)

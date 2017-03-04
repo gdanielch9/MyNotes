@@ -9,7 +9,7 @@
             @Html.ActionLink("Dodaj wspomnienie", "CreateEvent", null, new { @class = "btn btn-defaul event-addEvent-btn" })
         </p>
     </div>
-    <div class="row">
+    <div class="row events-container">
         @foreach (var ShowEventViewModel in Model)
         {
             <div class="col-md-offset-4 col-md-4 event-container">

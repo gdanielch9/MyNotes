@@ -36,9 +36,9 @@ namespace MyNote.Repositories
             return @event;
         }
 
-        public List<Event> GetEventList()
+        public List<Event> GetCurrentUserEventList(string userId)
         {
-            var eventList =_context.Events.Where(x=>x.IsDeleted != true).ToList();
+            var eventList =_context.Events.Where(x=>x.IsDeleted != true && x.UserId == userId).ToList();
             return eventList;
         }
 

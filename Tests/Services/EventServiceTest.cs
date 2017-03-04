@@ -34,7 +34,7 @@ namespace Tests.Services
         public void Given_ExchangeService_When_GetShowEventViewModelList_Then_Return_2ElementList()
         {
             // given
-            _eventsRepositoryMock.Setup(x => x.GetEventList()).Returns(new List<Event>()
+            _eventsRepositoryMock.Setup(x => x.GetCurrentUserEventList(It.IsAny<string>())).Returns(new List<Event>()
             {
                 new Event(),
                 new Event()
@@ -49,7 +49,7 @@ namespace Tests.Services
         public void Given_Exchange_Service_When_GetEventList_And_List_Is_Empty_Then_Return_Empty_NotNULL_List()
         {
             // given
-            _eventsRepositoryMock.Setup(x=>x.GetEventList()).Returns(new List<Event>());
+            _eventsRepositoryMock.Setup(x=>x.GetCurrentUserEventList(It.IsAny<string>())).Returns(new List<Event>());
             // when
             var result = _sut.GetShowEventViewModelList();
             // then
