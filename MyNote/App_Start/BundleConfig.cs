@@ -29,7 +29,13 @@ namespace MyNote
                       "~/Content/ShowEvents.css"));
 
             bundles.Add(new StyleBundle("~/Content/validators").Include(
-            "~/Content/Validation*"));
+                    "~/Content/Validation*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
+                    "~/Scripts/dropzone/dropzone.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/dropzone").Include(
+                    "~/Content/dropzone/dropzone.min.css"));
         }
     }
 }

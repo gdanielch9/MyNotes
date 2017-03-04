@@ -1,6 +1,4 @@
 using System;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 using MyNote.Services;
 using MyNote.Models;
 using System.Data.Entity;
@@ -10,6 +8,9 @@ using MyNote.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MyNote.Controllers;
+using System.Web.Http;
+using Microsoft.Practices.Unity;
+using Unity.WebApi;
 
 namespace MyNote.App_Start
 {
@@ -23,6 +24,8 @@ namespace MyNote.App_Start
         {
             var container = new UnityContainer();
             RegisterTypes(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+
             return container;
         });
 
@@ -54,6 +57,7 @@ namespace MyNote.App_Start
             container.RegisterType<IAuthInfrastructure, AuthInfrastructure>();
             container.RegisterType<IEventService, EventService>();
             container.RegisterType<IEventsRepository, EventsRepository>();
+            container.RegisterType<IPhotosService, PhotosService>();
 
         }
     }

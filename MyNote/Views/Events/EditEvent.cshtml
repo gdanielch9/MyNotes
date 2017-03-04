@@ -23,9 +23,7 @@
             @Html.ValidationMessageFor(model => model.EventFormDto.Text)
         </div>
         <div class="row event-footer">
-            <div class="col-md-offset-4 col-md-4 event-icons">
-            </div>
-            <div class="col-md-4 event-date">
+            <div class="col-md-offset-7  col-md-5 event-date">
                 @Html.EditorFor(model => model.EventFormDto.Date, new { htmlAttributes = new { @class = "event-form-date", placeholder = "Data" } })
                 @Html.ValidationMessageFor(model => model.EventFormDto.Date)
             </div>

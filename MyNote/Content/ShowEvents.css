@@ -6,7 +6,7 @@
     background-color: #ffffff;
     border-radius:20px;
     border: solid #abced4 2px;
-    margin-bottom: 20px;
+    margin-bottom: 20px;      
 }
 
 .event-container .event-title{
@@ -58,5 +58,19 @@
 }
 
 .events-container{
-    height: 900px;
+    height:900px;
+}
+
+.event-pictrue-container {    
+    min-height:30px; 
+    padding: 5px  0;
+}
+
+.event-pictrue-container .event-pictrue {
+    min-height:30px;    
+    width:100px;
+    background-color: #abced4;
+    width: 100px;
+    margin: auto;
+    border-radius:30px;
 }
