@@ -6,15 +6,14 @@
 
 <h2>Dodaj wspomnienie</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="col-md-offset-4 col-md-4 event-container">
         <div class="event-title">
-            @Html.EditorFor(model => model.EventFormDto.Title, new { htmlAttributes = new { @class = "event-form-title", placeholder = "Tytuł" }})
+            @Html.EditorFor(model => model.EventFormDto.Title, new { htmlAttributes = new { @class = "event-form-title", placeholder = "Tytuł" } })
             @Html.ValidationMessageFor(model => model.EventFormDto.Title)
         </div>
         <div class="event-text">
@@ -22,7 +21,8 @@
             @Html.ValidationMessageFor(model => model.EventFormDto.Text)
         </div>
         <div class="event-pictrue-container">
-            <div class="event-pictrue"></div>
+            <div id="event-pictrue" class="dropzone"></div>
+            <div class="event-pictrue-btn"><div >Dodaj zdjęcie</div></div>
         </div>
         <div class="row event-footer">
             <div class="col-md-offset-7 col-md-5 event-date">
@@ -31,19 +31,25 @@
             </div>
         </div>
     </div>
-    <div class="col-md-offset-5 col-md-2">
-        <input type="submit" value="Dodaj wspomnienie" class="btn btn-default" />
+    <div class="col-md-offset-4 col-md-4">
+        <input type="submit" value="Dodaj wspomnienie" class="btn btn-default add-event-btn"/>
     </div>
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/dropzone")
-    @Styles.Render("~/Content/dropzone")
-
+    @Styles.Render("~/Content/validators");
+    <script src="~/Scripts/dropzone.js"></script>
     <script>
         $(document).ready(function () {
-            $(".event-pictrue").dropzone({ url: "../Photos/UploadPhoto" });
+            $(".event-pictrue-btn div").dropzone({
+                url: "../Photos/UploadPhoto",
+                previewsContainer: "#event-pictrue",
+                maxFiles: 4,
+                acceptedFiles: ".jpg, .jpeg, .png",
+                maxFilesize: "2", // in MB
+                addRemoveLinks: true,
+                dictRemoveFile: "Usuń zdjęcie"
+            });
         })
     </script>
 }

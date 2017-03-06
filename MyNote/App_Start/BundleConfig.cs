@@ -32,10 +32,12 @@ namespace MyNote
                     "~/Content/Validation*"));
 
             bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
-                    "~/Scripts/dropzone/dropzone.min.js"));
+                    "~/Scripts/dropzone/dropzone.js",
+                    "~/Scripts/dropzone/dropzone-amd-module.js"));
 
             bundles.Add(new StyleBundle("~/Content/dropzone").Include(
-                    "~/Content/dropzone/dropzone.min.css"));
+                    "~/Content/dropzone/dropzone.css",
+                    "~/Content/dropzone/basic.css"));
         }
     }
 }

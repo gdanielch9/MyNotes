@@ -66,11 +66,41 @@
     padding: 5px  0;
 }
 
-.event-pictrue-container .event-pictrue {
+.event-pictrue-container .event-pictrue-btn {
     min-height:30px;    
     width:100px;
     background-color: #abced4;
     width: 100px;
     margin: auto;
     border-radius:30px;
+    display:block;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    position:relative;
+}
+
+.event-pictrue-container .event-pictrue-btn div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+    width:100%;
+    text-align:center;
+}
+
+.dropzone {
+    min-height: unset;
+    border: 2px solid #abced4;
+    background: white;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.dropzone .dz-preview {
+    margin: 5px;
+}
+
+.add-event-btn{
+    display:block;
+    margin:auto;
 }
