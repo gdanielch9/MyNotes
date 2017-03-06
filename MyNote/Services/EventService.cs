@@ -8,6 +8,8 @@ using MyNote.Repositories;
 using MyNote.Entities;
 using MyNote.Infrastructure;
 using Microsoft.AspNet.Identity;
+using System.IO;
+using System.Configuration;
 
 namespace MyNote.Services
 {
@@ -66,12 +68,23 @@ namespace MyNote.Services
             return showEventViewModelList;
         }
 
-        public void InsertEvent(EventFormDto eventFormDto)
+        public int InsertEventAndReturnEventId(EventFormDto eventFormDto)
         {
             var @event = _mappingInfrastructure.MapEventFormDtoToEvent(eventFormDto);
             @event.UserId = _authInfrastructure.GetCurrentUserId();
 
-            _eventsRepository.Insert(@event);
+            int eventId = _eventsRepository.InsertAndReturnId(@event);
+            MovePhotosFromTempToDest(eventFormDto.PhotoNames);
+
+            return eventId;
+        }
+
+        public void MovePhotosFromTempToDest(List<string> PhotoNames)
+        {
+            foreach (var photoName in PhotoNames)
+            {
+                File.Move(ConfigurationManager.AppSettings["tempImageDirectoryPath"] + "//" + photoName, ConfigurationManager.AppSettings["imageDirectoryPath"] + "//" + photoName);
+            }
         }
     }
 }

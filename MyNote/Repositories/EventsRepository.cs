@@ -42,10 +42,12 @@ namespace MyNote.Repositories
             return eventList;
         }
 
-        public void Insert(Event eventEntity)
+        public int InsertAndReturnId(Event eventEntity)
         {
             _context.Events.Add(eventEntity);
             _context.SaveChanges();
+
+            return eventEntity.Id;
         }
     }
 }

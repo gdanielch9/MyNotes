@@ -12,10 +12,12 @@ namespace MyNote.Controllers
     public class EventsController : Controller
     {
         private readonly IEventService _eventService;
+        private readonly IPhotosService _photoService;
 
-        public EventsController(IEventService eventService)
+        public EventsController(IEventService eventService, IPhotosService photoService)
         {
             _eventService = eventService;
+            _photoService = photoService;
         }
 
         public ActionResult CreateEvent()
@@ -34,7 +36,9 @@ namespace MyNote.Controllers
                 eventFormVewModel.EventFormDto = eventFormDto;
             }
 
-            _eventService.InsertEvent(eventFormDto);
+            int eventId = _eventService.InsertEventAndReturnEventId(eventFormDto);
+            _photoService.InsertPhotos(eventId, eventFormDto.PhotoNames);
+
             return RedirectToAction("ShowEvents");
         }
 

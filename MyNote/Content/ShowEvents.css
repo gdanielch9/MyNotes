@@ -104,3 +104,7 @@
     display:block;
     margin:auto;
 }
+
+.event-photos img{
+    max-width:100%;
+}

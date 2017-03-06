@@ -56,8 +56,9 @@ namespace MyNote.App_Start
             container.RegisterType<IMappingInfrastructure, MappingInfrastructure>();
             container.RegisterType<IAuthInfrastructure, AuthInfrastructure>();
             container.RegisterType<IEventService, EventService>();
-            container.RegisterType<IEventsRepository, EventsRepository>();
             container.RegisterType<IPhotosService, PhotosService>();
+            container.RegisterType<IEventsRepository, EventsRepository>();
+            container.RegisterType<IPhotosRepository, PhotosRepository>();
 
         }
     }

@@ -11,7 +11,7 @@ namespace MyNote.Services
     public interface IEventService
     {
         EventFormViewModel GetEventFormViewModel();
-        void InsertEvent(EventFormDto eventFormDto);
+        int InsertEventAndReturnEventId(EventFormDto eventFormDto);
         List<ShowEventViewModel> GetShowEventViewModelList();
         void DeleteEvent(int id);
         EventFormViewModel GetEventById(int id);

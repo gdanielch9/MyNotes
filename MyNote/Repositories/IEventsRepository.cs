@@ -9,7 +9,7 @@ namespace MyNote.Repositories
 {
     public interface IEventsRepository
     {
-        void Insert(Event eventEntity);
+        int InsertAndReturnId(Event eventEntity);
         List<Event> GetCurrentUserEventList(string userId);
         void Delete(int id);
         Event GetEventById(int id);

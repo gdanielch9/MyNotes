@@ -9,6 +9,8 @@ namespace MyNote.Services
 {
     public interface IPhotosService
     {
-        void UploadImageToTempDir(HttpPostedFile fileUpload);
+        string UploadImageToTempDirAndReturPhotoname(HttpPostedFile fileUpload);
+        void InsertPhotos(int eventId, List<string> photoNames);
+        byte[] GetPhotoData(int photoId);
     }
 }

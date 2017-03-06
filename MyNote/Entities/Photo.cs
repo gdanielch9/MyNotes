@@ -7,7 +7,7 @@ namespace MyNote.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string Path { get; set; }
+        public string PhotoName { get; set; }
 
         [ForeignKey("EventId")]
         public virtual Event Event { get; set; }

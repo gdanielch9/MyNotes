@@ -20,11 +20,11 @@ namespace MyNote.Dtos
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public string Date { get; set; }
-        public virtual List<string> PhotoPaths { get; set; }
+        public virtual List<string> PhotoNames { get; set; }
 
         public EventFormDto()
         {
-            PhotoPaths = new List<string>();
+            PhotoNames = new List<string>();
         }
     }
 }

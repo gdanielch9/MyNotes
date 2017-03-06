@@ -23,6 +23,8 @@
         <div class="event-pictrue-container">
             <div id="event-pictrue" class="dropzone"></div>
             <div class="event-pictrue-btn"><div >Dodaj zdjęcie</div></div>
+            <div class="photo-hidden-values">
+            </div>
         </div>
         <div class="row event-footer">
             <div class="col-md-offset-7 col-md-5 event-date">
@@ -41,14 +43,26 @@
     <script src="~/Scripts/dropzone.js"></script>
     <script>
         $(document).ready(function () {
+            var photoCount = 0;
+
+            function setPhotoNameIfIsUploaded(data) {
+                var result = data.xhr.responseText;
+                $(".photo-hidden-values").append('<input id="EventFormDto_PhotoNames_' + photoCount +
+                    '_" name="EventFormDto.PhotoNames[' + photoCount + ']" type="hidden" value="' + result + '">');
+                photoCount++;
+            };
+
             $(".event-pictrue-btn div").dropzone({
                 url: "../Photos/UploadPhoto",
                 previewsContainer: "#event-pictrue",
                 maxFiles: 4,
                 acceptedFiles: ".jpg, .jpeg, .png",
-                maxFilesize: "2", // in MB
+                maxFilesize: "2",
                 addRemoveLinks: true,
-                dictRemoveFile: "Usuń zdjęcie"
+                dictRemoveFile: "Usuń zdjęcie",
+                init: function () {
+                    this.on("success", setPhotoNameIfIsUploaded);
+                }
             });
         })
     </script>

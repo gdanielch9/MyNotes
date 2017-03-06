@@ -19,6 +19,12 @@
                 <div class="event-text">
                     @Html.DisplayFor(modelItem => ShowEventViewModel.Text)
                 </div>
+                <div  class="event-photos">
+                    @foreach (var photo in ShowEventViewModel.Photos)
+                    {
+                        <img src="/Photos/Get/@(photo.Id)">
+                    }
+                </div>
                 <div class="row event-footer">
                     <div class="col-md-offset-4 col-md-4 event-icons">
                         @Html.ActionLink(" ", "EditEvent", new { id = ShowEventViewModel.Id }, new { @class = "glyphicon glyphicon-edit " }) |
@@ -36,9 +42,10 @@
 
 @section Scripts{
     <script>
-        function DeleteConfirm() {
-            var result = confirm("Na pewno chcesz usunąć wspomnienie?");
-            return result;
-        }
+            function DeleteConfirm() {
+                var result = confirm("Na pewno chcesz usunąć wspomnienie?");
+                return result;
+            };
+        
     </script>
  }
