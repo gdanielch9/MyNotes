@@ -22,6 +22,17 @@
             @Html.EditorFor(model => model.EventFormDto.Text, new { htmlAttributes = new { @class = "event-form-text", placeholder = "Treść" } })
             @Html.ValidationMessageFor(model => model.EventFormDto.Text)
         </div>
+        <div class="event-pictrue-container">
+            <div id="event-pictrue" class="dropzone"></div>
+            <div class="event-pictrue-btn"><div>Dodaj zdjęcie</div></div>
+            <div class="photo-hidden-values">
+                @for (int i = 0; i < Model.EventFormDto.PhotoNames.Count(); i++)
+                {
+                    <input class="hidden-photo" id="EventFormDto_PhotoNames_@(i)_" name="EventFormDto.PhotoNames[@(i)]" type="hidden" value="@Model.EventFormDto.PhotoNames[i]">
+                }
+            </div>
+        </div>
+
         <div class="row event-footer">
             <div class="col-md-offset-7  col-md-5 event-date">
                 @Html.EditorFor(model => model.EventFormDto.Date, new { htmlAttributes = new { @class = "event-form-date", placeholder = "Data" } })
@@ -37,4 +48,77 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Styles.Render("~/Content/validators");
+    <script src="~/Scripts/dropzone.js"></script>
+    <script>
+        $(document).ready(function () {
+            var photoCount = 0; //$('.hidden-photo').length;
+
+            var addPhotosWhenInputsNotNull = function (myDropzone) {
+                for (var i = 0; i < $('.hidden-photo').length ; i++) {
+                    var photoName = $('.hidden-photo')[i].value;
+
+                    var mockFile = {
+                        name: photoName.split(/_(.+)?/)[1],  // divide string into two parts (first "_" is separator)
+                        accepted: true,
+                        kind: "image"
+                    };
+
+                    myDropzone.emit("addedfile", mockFile);
+                    myDropzone.files.push(mockFile);
+                    myDropzone.createThumbnailFromUrl(mockFile,
+                        "/Photos/GetPhotoByName/" + photoName,
+                        function () {
+                            myDropzone.emit("complete", mockFile);
+                        });
+                    photoCount++;
+                }
+            };
+
+            function setPhotoNameIfIsUploaded(data) {
+                var result = data.xhr.responseText;
+                $(".photo-hidden-values").append('<input id="EventFormDto_PhotoNames_' + photoCount +
+                    '_" name="EventFormDto.PhotoNames[' + photoCount + ']" type="hidden" value="' + result + '">');
+                photoCount++;
+            };
+
+            function setPhotoId(data) {
+                $(".dz-preview:last-child").attr('id', "photoId" + photoCount);
+            }
+
+            $(".event-pictrue-btn div").dropzone({
+                url: "/Photos/UploadPhoto",
+                previewsContainer: "#event-pictrue",
+                maxFiles: 4,
+                acceptedFiles: ".jpg, .jpeg, .png",
+                maxFilesize: "2",
+                addRemoveLinks: true,
+                dictRemoveFile: "Usuń zdjęcie",
+                init: function () {
+                    this.on("success", setPhotoNameIfIsUploaded);
+                    this.on("addedfile", setPhotoId);
+                    this.on("addedfile", addRemoveReaction);
+                    addPhotosWhenInputsNotNull(this);
+                }
+            });
+
+            function Foo() {
+                    var photoNumber = this.parentNode.id.match(/\d+/);
+                    $("#EventFormDto_PhotoNames_" + photoNumber + "_").remove();
+                    hiddenPhotoList = $(".hidden-photo");
+
+                    photoCount = 0;
+                    hiddenPhotoList.each(function (element) {
+                        var oldNumber = this.id.match(/\d+/);
+                        $("#photoId" + oldNumber).attr("id", "photoId" + photoCount);
+                        this.setAttribute("id", "EventFormDto_PhotoNames_" + photoCount + "_");
+                        this.setAttribute("name", "EventFormDto.PhotoNames[" + photoCount + "]");
+                        photoCount++;
+                    })
+            }
+
+            function addRemoveReaction() {
+                $(".dz-remove").get(-1).addEventListener("click", Foo, false);
+            }
+        })
+    </script>
 }

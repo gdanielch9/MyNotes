@@ -62,7 +62,7 @@ namespace MyNote.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditEvent(EventFormDto eventFormDto)
+        public ActionResult EditEvent([Bind(Prefix = "EventFormDto")] EventFormDto eventFormDto)
         {
             if (!ModelState.IsValid)
             {
@@ -73,6 +73,8 @@ namespace MyNote.Controllers
             }
 
             _eventService.EditEvent(eventFormDto);
+            _photoService.EditPhotos(eventFormDto.Id, eventFormDto.PhotoNames);
+
             return RedirectToAction("ShowEvents");
         }
 

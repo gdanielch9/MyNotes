@@ -52,5 +52,23 @@ namespace MyNote.Controllers.Api
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
             return response;
         }
+
+        [Route("Photos/GetPhotoByName/{photoName}")]
+        public HttpResponseMessage GetPhotoByName(string photoName)
+        {
+            byte[] photo = _photosService.GetPhotoData(photoName);
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            if (photo == null)
+            {
+                response.StatusCode = HttpStatusCode.NotFound;
+                return response;
+            }
+
+            response.StatusCode = HttpStatusCode.OK;
+            response.Content = new ByteArrayContent(photo);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+            return response;
+        }
     }
 }

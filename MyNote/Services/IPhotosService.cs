@@ -12,5 +12,7 @@ namespace MyNote.Services
         string UploadImageToTempDirAndReturPhotoname(HttpPostedFile fileUpload);
         void InsertPhotos(int eventId, List<string> photoNames);
         byte[] GetPhotoData(int photoId);
+        byte[] GetPhotoData(string photoName);
+        void EditPhotos(int id, List<string> photoNames);
     }
 }

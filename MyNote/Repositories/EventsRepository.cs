@@ -32,7 +32,7 @@ namespace MyNote.Repositories
 
         public Event GetEventById(int id)
         {
-            var @event = _context.Events.Where(x=> x.IsDeleted != true).Single(x => x.Id == id);
+            var @event = _context.Events.Where(x=> x.IsDeleted != true).Include(x=>x.Photos).Single(x => x.Id == id);
             return @event;
         }
 

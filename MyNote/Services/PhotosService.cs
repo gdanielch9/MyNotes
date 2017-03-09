@@ -38,6 +38,18 @@ namespace MyNote.Services
             }
         }
 
+        public void EditPhotos(int eventId, List<string> photoNames)
+        {
+            var photos = photoNames.Select(x => new Photo
+            {
+                EventId = eventId,
+                PhotoName = x
+            }).ToList();
+
+            _photosRepository.InsertNewPhotos(eventId, photos);
+            _photosRepository.RemoveDeletedPhotos(photos);
+        }
+
         public string GetUniqueImageName(string fileName)
         {
             string uniqueImageName = Guid.NewGuid().ToString() + "_" + fileName;
@@ -80,6 +92,22 @@ namespace MyNote.Services
                 return null;
             }
             var photoData = File.ReadAllBytes(GetImageDirectoryPath(photo.PhotoName));
+
+            return photoData;
+        }
+
+        public byte[] GetPhotoData(string photoName)
+        {
+            byte[] photoData = null;
+
+            if (File.Exists(GetImageDirectoryPath(photoName)))
+            {
+                photoData = File.ReadAllBytes(GetImageDirectoryPath(photoName));
+            }
+            else if (File.Exists(GetTempImageDirectoryPath(photoName)))
+            {
+                photoData = File.ReadAllBytes(GetTempImageDirectoryPath(photoName));
+            }
 
             return photoData;
         }

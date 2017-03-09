@@ -34,7 +34,9 @@ namespace MyNote.Services
         public void EditEvent(EventFormDto eventFormDto)
         {
             var @event = _mappingInfrastructure.MapEventFormDtoToEvent(eventFormDto);
+            @event.UserId = _authInfrastructure.GetCurrentUserId();
             _eventsRepository.Edit(@event);
+            MovePhotosFromTempToDest(eventFormDto.PhotoNames);
         }
 
         public EventFormViewModel GetEventById(int id)
@@ -83,7 +85,10 @@ namespace MyNote.Services
         {
             foreach (var photoName in PhotoNames)
             {
-                File.Move(ConfigurationManager.AppSettings["tempImageDirectoryPath"] + "//" + photoName, ConfigurationManager.AppSettings["imageDirectoryPath"] + "//" + photoName);
+                if (File.Exists(ConfigurationManager.AppSettings["tempImageDirectoryPath"] + "//" + photoName))
+                {
+                    File.Move(ConfigurationManager.AppSettings["tempImageDirectoryPath"] + "//" + photoName, ConfigurationManager.AppSettings["imageDirectoryPath"] + "//" + photoName);
+                }
             }
         }
     }

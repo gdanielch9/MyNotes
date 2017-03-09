@@ -27,6 +27,8 @@ namespace MyNote.Infrastructure
         public EventFormDto MapEventToEventFormDto(Event @event)
         {
             var eventFormDto = _mapper.Map<Event, EventFormDto>(@event);
+            eventFormDto.PhotoNames = @event.Photos.Select(x=>x.PhotoName).ToList();
+
             return eventFormDto;
         }
 
